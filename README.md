@@ -32,22 +32,22 @@ In the PNR dataset, there are 7656315 entries and if there is no information for
 ##### Feature Engineering
 PNR and TICKET datasets are merged and new features are created. A wide range of and promising features are added to the dataset. For example, by using additional dataset binary features are added as if nationality of the ticket owner is the same as the departure country and the arrival country.
 
--pnr_create_month             : The month the PNR was created in  GMT time type.
--pnr_create_weekday	    : The weekday the PNR was created in  GMT time type.
--flight_month_1	    : The month of the first flight
--flight_weekday_1               : The weekday of the first flight
--flight_month_2	    : The month of the second flight
--flight_weekday_2	    : The weekday of the second flight
--flight_duration_1	    : The flight duration of the first flight
--flight_duration_2	    : The flight duration of the second flight
--arrival_interval_1               : Arrival intervals of first flight (05:00-11:00, 11:00-18:00, 18:00-05:00) 
--arrival_interval_2	    : Arrival intervals of second flight (05:00-11:00, 11:00-18:00, 18:00-05:00)
--diff_pnr_firstflight              : number of days between first flight and PNR creation date
--diff_second_firstflight	    : number of days between second flight and first flight
--pnr_workhour_interval     : Is PNR creation hour in workhours or not? (Workhours 08:00-18:00)
--num_of_flights                   : Number of flights for each PNR
--dep_nat_flag	    : if nationality of the ticket owner is the same as the departure country
--arr_nat_flag		    : if nationality of the ticket owner is the same as the arrival country
+- pnr_create_month             : The month the PNR was created in  GMT time type.
+- pnr_create_weekday	    : The weekday the PNR was created in  GMT time type.
+- flight_month_1	    : The month of the first flight
+- flight_weekday_1               : The weekday of the first flight
+- flight_month_2	    : The month of the second flight
+- flight_weekday_2	    : The weekday of the second flight
+- flight_duration_1	    : The flight duration of the first flight
+- flight_duration_2	    : The flight duration of the second flight
+- arrival_interval_1               : Arrival intervals of first flight (05:00-11:00, 11:00-18:00, 18:00-05:00) 
+- arrival_interval_2	    : Arrival intervals of second flight (05:00-11:00, 11:00-18:00, 18:00-05:00)
+- diff_pnr_firstflight              : number of days between first flight and PNR creation date
+- diff_second_firstflight	    : number of days between second flight and first flight
+- pnr_workhour_interval     : Is PNR creation hour in workhours or not? (Workhours 08:00-18:00)
+- num_of_flights                   : Number of flights for each PNR
+- dep_nat_flag	    : if nationality of the ticket owner is the same as the departure country
+- arr_nat_flag		    : if nationality of the ticket owner is the same as the arrival country
 
 ##### Modeling
 After solving the class imbalance problem by random undersampling for target variable, data is split as train and test and a pipeline is created to convey all the data preprocessing steps. Numerical, categorical str and categorical int are the main categories for features in pipeline structure. If the data is naturally null like, if the ticket does not have a second flight, constant values are imputed on the other hand, if the data is null because missingness, median imputation (median is the most promising one among mean, mode, median imputation) is used.
@@ -67,12 +67,12 @@ In this project, it is expected to predict whether there will be a delay in carg
 Missing values, outliers, conflicts, nulls are detected and removed from the dataset. Correlation analysis is conducted and some columns are removed.
 ##### Feature Engineering 
 New Features are created by using existing features:
-Flight_duration: Difference in minutes between departure and arrival times
-arr_month: Month of the arrival date
-arr_weekday : Weekday of the arrival date
-arr_day : Day of the month of the arrival date
-expected_arrival_interval : interval number of the arrival number (interval distance is 30 mins)
-expected_departure_interval : interval number of the departure number (interval distance is 30 mins)
+- Flight_duration: Difference in minutes between departure and arrival times
+- arr_month: Month of the arrival date
+- arr_weekday : Weekday of the arrival date
+- arr_day : Day of the month of the arrival date
+- expected_arrival_interval : interval number of the arrival number (interval distance is 30 mins)
+- expected_departure_interval : interval number of the departure number (interval distance is 30 mins)
 ##### Modeling
 After solving the data imbalance problem, pipeline structure is constructed to apply all preprocessing steps. 22 different classification models from sklearn library are applied to choose top classifiers. The best 3 of them are chosen for further improvements based on f1-score.
 In order to improve these scores, hyperparameter tuning procedure is operated for top classifiers and ensemble classifiers are constructed. Different variations of voting classifiers and stacking classifiers are used as more complex models and top scores are obtained with stacking classifier. Extra Tree Classifier, Random Forest and K-NN with their optimal parameters are used as estimators in the stacking classifier to get final scores, which is 0.80.
