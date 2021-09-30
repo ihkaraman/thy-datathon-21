@@ -76,7 +76,8 @@ expected_departure_interval : interval number of the departure number (interval 
 ##### Modeling
 After solving the data imbalance problem, pipeline structure is constructed to apply all preprocessing steps. 22 different classification models from sklearn library are applied to choose top classifiers. The best 3 of them are chosen for further improvements based on f1-score.
 In order to improve these scores, hyperparameter tuning procedure is operated for top classifiers and ensemble classifiers are constructed. Different variations of voting classifiers and stacking classifiers are used as more complex models and top scores are obtained with stacking classifier. Extra Tree Classifier, Random Forest and K-NN with their optimal parameters are used as estimators in the stacking classifier to get final scores, which is 0.80.
-
+##### Further Improvements
+Using additional dataset will help to increase model metrics further. For example, using weather data, holidays and important events data, and more information about airports, like ppulation or population density of cities, development and industry level of cities would help to increase model performance.
 ##### Cargo Delay Reason Analysis
 After predicting whether there will be a delay or not, delay reasons are predicted as well. There are more than 350 reasons and nearly all of them occur rarely. Therefore, it is almost impossible to predict all the 350 labels with insufficient data and simpler methods should be adopted. 
 When delay codes are checked, 93Z and 89Z are the majority codes in the data and corresponds to 65% in total. Remaining codes are gathered in ‘others’ category to simplify the modelling. Multi output classification is trained and 0.75 of f1-score is obtained in average. 
